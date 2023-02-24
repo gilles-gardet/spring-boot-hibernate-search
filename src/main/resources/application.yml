@@ -1,0 +1,25 @@
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+server:
+  port: 9000
+spring:
+  datasource:
+    url: jdbc:h2:mem:gilles # http://localhost:9000/h2-console
+    username: user
+    password: password
+  h2:
+    console:
+      enabled: true
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        search:
+          backend:
+            type: lucene
+            directory.root: ./data/index

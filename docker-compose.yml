@@ -1,0 +1,39 @@
+version: '3.1'
+services:
+#  oracle:
+#    image: container-registry.oracle.com/database/enterprise:latest
+#    environment:
+#      - ORACLE_SID=service_identifier
+#      - ORACLE_PDB=ORCLPDB1
+#      - ORACLE_PWD=my_password
+#    ports:
+#      - "1521:1521"
+#    volumes:
+#      - oracle-data:/opt/oracle/oradata
+#      - oracle-backup:/opt/oracle/backup
+#    healthcheck:
+#      test: ["CMD", "sqlplus", "-L", "sys/my_password@//localhost:1521/service_identifier as sysdba", "@healthcheck.sql"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#  flyway:
+#    image: flyway/flyway:9.15
+#    command: -url=jdbc:oracle:thin:@//localhost:1521/service_identifier -schemas=myschema -user=root -password=my_password -connectRetries=60 migrate
+#    volumes:
+#      - .:/flyway/sql
+#    depends_on:
+#      oracle:
+#        condition: service_healthy
+#volumes:
+#  oracle-data:
+#  oracle-backup:
+  database:
+    image: 'postgres:alpine3.17'
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database
+    volumes:
+      - ./data/db/:/var/lib/postgresql/data/
